@@ -1,4 +1,4 @@
-const CarritoElemento = require('../models/carritoElementosModel');
+import CarritoElemento from '../models/carritoElementosModel.js';
 
 async function addProductToCart(carritoId, productoId, cantidad, precioUnitario) {
   try {
@@ -53,9 +53,10 @@ async function getCartItems(carritoId) {
   }
 }
 
-module.exports = {
+export default {
   addProductToCart,
   updateProductQuantity,
   updateProductPrice,
   getCartItems,
 };
+

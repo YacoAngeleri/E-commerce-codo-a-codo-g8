@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/sequelize');
+import sequelize from '../config/sequelize.js';
+import { DataTypes } from 'sequelize';
 
 const MainModel = {
   getHome: async () => {
@@ -23,4 +23,4 @@ const MainModel = {
   },
 };
 
-module.exports = MainModel;
+export default MainModel;

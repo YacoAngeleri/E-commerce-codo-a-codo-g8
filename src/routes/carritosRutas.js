@@ -1,10 +1,8 @@
-const express = require('express');
+import express from 'express';
+import CarritosController from '../controllers/carritosController.js';
+import authMiddleware from '../middleware/authMiddleware.js';
+
 const router = express.Router();
-
-const CarritosController = require('../controllers/carritosController');
-
-const authMiddleware = require('../middleware/authMiddleware');
-
 //router.use(authMiddleware);
 
 router.post('/nuevo/:clienteId', async (req, res) => {
@@ -63,4 +61,4 @@ router.get('/historial/:clienteId', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

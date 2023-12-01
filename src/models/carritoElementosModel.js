@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/sequelize'); // Ajusta la ruta según la ubicación de tu configuración de Sequelize
+import sequelize from '../config/sequelize.js'; // Ajusta la ruta según la ubicación de tu configuración de Sequelize
+import { DataTypes } from 'sequelize';
 
 const CarritoElemento = sequelize.define('carrito_elementos', {
   id_elemento: {
@@ -27,4 +27,4 @@ const CarritoElemento = sequelize.define('carrito_elementos', {
 
 
 
-module.exports = CarritoElemento;
+export default CarritoElemento;

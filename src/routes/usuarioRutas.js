@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const authController = require('../controllers/authFuncionesController');
+import authController from '../controllers/authFuncionesController.js';
 
 router.get('/check-admin-exists', authController.checkAdminExists);
 router.get('/create-default-admin', authController.createDefaultAdmin);
 router.post('/login', authController.login);
 
-module.exports = router;
+export default router;

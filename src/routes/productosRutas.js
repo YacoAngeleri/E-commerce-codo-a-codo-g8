@@ -1,11 +1,10 @@
 // routes/productosRutas.js
-const express = require('express');
+import express from 'express';
+import ProductosController from '../controllers/productosController.js';
+import authMiddleware from '../middleware/authMiddleware.js';
+
+//router.use(authMiddleware);
 const router = express.Router();
-const ProductosController = require('../controllers/productosController');
-const authMiddleware = require('../middleware/authMiddleware');
-
-
-// router.use(authMiddleware);
 
 router.get('/get-all', async (req, res) => {
   try {
@@ -57,4 +56,4 @@ router.delete('/delete/:productId', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

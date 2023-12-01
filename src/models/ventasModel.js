@@ -1,5 +1,7 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/sequelize'); // Ajusta la ruta según tu configuración de Sequelize
+// Archivo: ventasModel.js
+
+import sequelize from '../config/sequelize.js'; // Ajusta la ruta según tu configuración de Sequelize
+import { DataTypes } from 'sequelize';
 
 const Ventas = sequelize.define('Ventas', {
   id_venta: {
@@ -54,4 +56,4 @@ const Ventas = sequelize.define('Ventas', {
   },
 });
 
-module.exports = Ventas;
+export default Ventas;

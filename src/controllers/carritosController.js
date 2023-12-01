@@ -1,6 +1,6 @@
-const CarritoElemento = require('../models/carritoElementosModel');
-const Carritos = require('../models/carritosModel');
-const Clientes = require('../models/clientesModel');
+import CarritoElemento from '../models/carritoElementosModel.js';
+import Carritos from '../models/carritosModel.js';
+import Clientes from '../models/clientesModel.js';
 
 const CarritosController = {
 
@@ -91,4 +91,7 @@ const CarritosController = {
   },
 };
 
-module.exports = CarritosController;
+
+export default CarritosController;
+
+

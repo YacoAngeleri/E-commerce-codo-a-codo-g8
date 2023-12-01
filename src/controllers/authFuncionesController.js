@@ -1,5 +1,5 @@
 // controllers/authFuncionesController.js
-const authModel = require('../models/authFuncionesModel');
+import authModel from '../models/authFuncionesModel.js';
 
 async function checkAdminExists(req, res) {
   try {
@@ -29,4 +29,5 @@ async function login(req, res) {
   }
 }
 
-module.exports = { checkAdminExists, createDefaultAdmin, login };
+
+export default { checkAdminExists, createDefaultAdmin, login };

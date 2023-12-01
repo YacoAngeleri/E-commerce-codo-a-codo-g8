@@ -1,7 +1,8 @@
 // models/authFuncionesModel.js
-const bcrypt = require('bcrypt');
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/sequelize');
+import bcrypt from 'bcrypt';
+import sequelize from '../config/sequelize.js';
+import { DataTypes } from 'sequelize';
+
 
 const Usuario = sequelize.define('Usuario', {
   nombre: {
@@ -59,4 +60,4 @@ async function login(email, password) {
   return user;
 }
 
-module.exports = { checkAdminExists, createDefaultAdmin, login };
+export default { checkAdminExists, createDefaultAdmin, login };

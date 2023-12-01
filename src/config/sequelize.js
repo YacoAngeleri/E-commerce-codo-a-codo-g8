@@ -1,8 +1,8 @@
-const dotenv = require ('dotenv');
-const { Sequelize } = require('sequelize');
+import dotenv from 'dotenv'; 
+import { Sequelize } from 'sequelize';
 
 // Carga las variables de entorno para la base de datos desde el archivo .env.db
-dotenv.config({ path: '.env.db' });
+dotenv.config();
 
 // Accede a las variables de entorno para la base de datos
 const dbDialect = process.env.DB_DIALECT;
@@ -34,4 +34,4 @@ const sequelize = new Sequelize({
   }
 })();
 
-module.exports = sequelize;
+export default sequelize;

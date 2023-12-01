@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const MainController = require('../controllers/mainController');
+import express from 'express';
+import MainController from '../controllers/mainController.js';
 
+const router = express.Router();
 router.get('/home', async (req, res) => {
     try {
         const results = await MainController.getHome();
@@ -42,4 +42,4 @@ router.get('/faqs', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

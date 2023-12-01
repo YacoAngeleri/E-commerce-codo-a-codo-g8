@@ -1,7 +1,8 @@
-const Venta = require('../models/ventasModel');
-const Producto = require ('../controllers/productosController');
-const Carritos = require('../models/carritosModel'); 
-const sequelize = require('../config/sequelize');
+import Venta from '../models/ventasModel.js';
+import Producto from '../controllers/productosController.js';
+import Carritos from '../models/carritosModel.js'; // Asegúrate de ajustar la ruta según tu estructura de carpetas y configuración
+//const Carritos = require ('../controllers/carritosController');
+import sequelize from '../config/sequelize.js';
 
 const VentasController = {
   getAllVentas: async () => {
@@ -108,4 +109,5 @@ const VentasController = {
   },
 };
 
-module.exports = VentasController;
+export default VentasController;
+

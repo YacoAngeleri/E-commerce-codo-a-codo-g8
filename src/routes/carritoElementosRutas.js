@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const CarritoElementosController = require('../controllers/carritoElementosController');
+import express from 'express';
+import CarritoElementosController from '../controllers/carritoElementosController.js';
 
+const router = express.Router();
 // Agregar un producto al carrito
 router.post('/carrito-elementos/add', async (req, res) => {
   const { carritoId, productoId, cantidad, precioUnitario } = req.body;
@@ -58,4 +58,4 @@ router.get('/carrito-elementos/:carritoId', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

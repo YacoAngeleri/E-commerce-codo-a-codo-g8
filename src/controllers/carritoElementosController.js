@@ -1,5 +1,5 @@
-const CarritoElementosModel = require('../models/carritoElementosModel');
-const CarritoElementosFunctions = require('../functions/carritoElementosFunctions');
+import CarritoElementosModel from '../models/carritoElementosModel.js';
+import CarritoElementosFunctions from '../functions/carritoElementosFunctions.js';
 
 
 const CarritoElementosController = {
@@ -36,4 +36,4 @@ const CarritoElementosController = {
   },
 };
 
-module.exports = CarritoElementosController;
+export default CarritoElementosController;

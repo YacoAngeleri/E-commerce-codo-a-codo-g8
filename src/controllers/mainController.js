@@ -1,4 +1,4 @@
-const MainModel = require('../models/mainModel');
+import MainModel from '../models/mainModel.js';
 
 const MainController = {
   getHome: async () => {
@@ -34,4 +34,4 @@ const MainController = {
   },
 };
 
-module.exports = MainController;
+export default MainController;

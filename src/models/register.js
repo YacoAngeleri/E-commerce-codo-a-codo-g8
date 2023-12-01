@@ -1,5 +1,5 @@
 // importación de conexión
-import conn from '../config/conn.js';
+import sequelize from '../config/sequelize.js';
 import bcrypt from 'bcrypt';
 
 

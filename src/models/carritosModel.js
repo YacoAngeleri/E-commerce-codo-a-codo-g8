@@ -1,8 +1,6 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/sequelize');
-const CarritoElemento = require('./carritoElementosModel');
-
-
+import sequelize from '../config/sequelize.js';
+import { DataTypes } from 'sequelize';
+import CarritoElemento from './carritoElementosModel.js';
 
 const Carritos = sequelize.define('Carritos', {
   id_carrito: {
@@ -31,4 +29,4 @@ CarritoElemento.belongsTo(Carritos, { foreignKey: 'id_carrito' });
 
 
 
-module.exports = Carritos;
+export default Carritos;

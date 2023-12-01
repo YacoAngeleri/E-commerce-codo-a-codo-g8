@@ -1,7 +1,10 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/sequelize'); // Ajusta la ruta según tu configuración de Sequelize
+// Archivo: clientesModel.js
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/sequelize.js';
 
-const Clientes = sequelize.define('Clientes', {
+ // Ajusta la ruta según tu configuración de Sequelize
+
+ const Clientes = sequelize.define('Clientes', {
   id_cliente: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -51,4 +54,4 @@ const Clientes = sequelize.define('Clientes', {
   },
 });
 
-module.exports = Clientes;
+export default Clientes;
