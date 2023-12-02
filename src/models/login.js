@@ -1,11 +1,14 @@
 // importación de conexión
-import conn from '../config/conn.js';
+import sequelize from '../config/sequelize.js';
+import { DataTypes } from 'sequelize';
 import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken';
 import { comparePasswords, insertUserIntoDatabase } from './register.js';
 import dotenv from 'dotenv';
 
+
 dotenv.config();
+
 async function findUserByEmail(email) {
     try {
         // Consulta SQL para encontrar un usuario por su correo electrónico
