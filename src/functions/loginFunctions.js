@@ -1,6 +1,6 @@
 import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken';
-import { comparePasswords, insertUserIntoDatabase } from './register.js';
+import { comparePasswords, insertUserIntoDatabase } from './registerFunctions.js';
 import dotenv from 'dotenv';
 
 

@@ -18,13 +18,14 @@ async function insertUserIntoDatabase(nombre, apellido, email, contraseña) {
   
       // Crea un nuevo usuario utilizando el modelo Usuario
       const newUser = await Usuario.create({
-        nombre,
-        apellido,
+        nombre: nombre,
+        apellido: apellido,
         correo: email,
         contrasena: hashedPassword, 
       });
   
       return newUser;
+
     } catch (error) {
       console.error('Error al insertar usuario en la base de datos:', error);
       throw error;

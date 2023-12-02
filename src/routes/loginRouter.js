@@ -1,8 +1,9 @@
 import express from 'express';
-import cors from 'cors';
+//mport cors from 'cors';
 import loginUser from "../models/usuariosModel.js"
 import ProductosController from '../controllers/productosController.js';
 import authMiddleware from '../middleware/authMiddleware.js';
+import bodyParser from 'body-parser';
 
 //Fix para __direname
 import path from 'path';
@@ -11,6 +12,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 
 const loginRouter = express.Router();
+
+loginRouter.use(bodyParser.urlencoded({ extended: true }));
+loginRouter.use(bodyParser.json());
 
 loginRouter.get('/login', async (req, res) => {
     // Ruta al archivo HTML que deseas enviar
@@ -25,15 +29,10 @@ loginRouter.get('/login', async (req, res) => {
         console.log('Recibiendo solicitud POST en /login');
         const { email, contraseña } = req.body;
         console.log('Datos del formulario de inicio de sesión:', { email, contraseña });
-
-        // Intenta iniciar sesión
-        const token = await loginUser(email, contraseña);
-
         
-  
-    // Envía el archivo HTML como respuesta
-    const htmlFilePath2 = path.join(__dirname, '../../public/HTML/productos.html');
-    res.sendFile(htmlFilePath2);
+        // Envía el archivo HTML como respuesta
+        const htmlFilePath2 = path.join(__dirname, '../../public/HTML/productos.html');
+        res.sendFile(htmlFilePath2);
        
     } catch (error) {
         console.error('Error en el inicio de sesión:', error);
