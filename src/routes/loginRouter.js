@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import loginUser from "../models/login.js"
+import loginUser from "../models/usuariosModel.js"
 import ProductosController from '../controllers/productosController.js';
 import authMiddleware from '../middleware/authMiddleware.js';
 

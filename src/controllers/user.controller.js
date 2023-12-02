@@ -1,16 +1,41 @@
-// import bcrypt from "bcrypt";
-// const saltRounds = 10
+import bcrypt from 'bcrypt';
+import { Usuario } from './usuariosModel.js';
 
 
-// export async function crearCuenta (req, res) {
-// try {
-//     const {mail, clave} = req.body;
-    
-//     const hashed = await bcrypt.hash (clave, saltRounds);
-//     console.log(hashed);
-// } catch (error){
+async function hashPassword(plainPassword) {
+    const saltRounds = 10; 
+    const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
+    return hashedPassword;
+}
 
-// }
+
+async function insertUserIntoDatabase(nombre, apellido, email, contraseña) {
+    try {
+      const hashedPassword = await hashPassword(contraseña);
   
-// }
+      // Crea un nuevo usuario utilizando el modelo Usuario
+      const newUser = await Usuario.create({
+        nombre,
+        apellido,
+        correo: email,
+        contrasena: hashedPassword, 
+      });
+  
+      return newUser;
+    } catch (error) {
+      console.error('Error al insertar usuario en la base de datos:', error);
+      throw error;
+    }
+  }
+
+async function comparePasswords(plainPassword, hashedPassword) {
+    const match = await bcrypt.compare(plainPassword, hashedPassword);
+    console.log(plainPassword);
+    console.log(hashedPassword)
+    return match;
+    
+}
+
+export { comparePasswords, insertUserIntoDatabase } 
+
 

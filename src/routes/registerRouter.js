@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import {insertUserIntoDatabase} from "../models/register.js"
+import {insertUserIntoDatabase} from "../functions/registerFunctions.js"
 
 //Fix para __direname
 import path from 'path';
