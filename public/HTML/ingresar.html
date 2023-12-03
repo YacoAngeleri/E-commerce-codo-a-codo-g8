@@ -56,6 +56,7 @@
             <h1 class="text-center">INGRESAR A MI CUENTA</h1>
                 
             <form id= "login-form" action="/login" class="container" method="post">
+                
 
                 <div class="reg row justify-content-center">
                 <label for="email" class="col-md-3">Email:</label>
@@ -68,6 +69,8 @@
                 </div>
                 
                 <div class="reg registro d-flex flex-row justify-content-center align-items-baseline">
+                
+                <input type="hidden" name="isAdmin" value="true">
                 <input type="submit" value="INGRESAR" class="btn btn-danger">
                 <input type="checkbox" value="recordarme" class="check form-check-input">
                 <label for="recordarme" class="form-check-label">Recordarme</label>

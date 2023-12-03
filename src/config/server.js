@@ -10,7 +10,6 @@ import productosRoutes from '../routes/productosRutas.js';
 import carritosRoutes from '../routes/carritosRutas.js';
 import carritoElementosRoutes from '../routes/carritoElementosRutas.js';
 import ventasRoutes from '../routes/ventasRutas.js';
-import authRoutes from '../routes/usuarioRutas.js';
 import mainRoutes from '../routes/mainRutas.js';
 
 import {fileURLToPath} from 'url';
@@ -39,11 +38,11 @@ app.use('/api/productos', productosRoutes);
 app.use('/carritos', carritosRoutes);
 app.use('/api/carrito-elementos', carritoElementosRoutes);
 app.use('/api/ventas', ventasRoutes);
-app.use('/api/users', authRoutes);
-app.use('/api/', mainRoutes);
+//app.use('/api/users', authRoutes);
+//app.use('/api/', mainRoutes);
+
 app.use('/', loginRouter);
 app.use('/', registerRouter);
-
 
 app.set('port', port);
 
