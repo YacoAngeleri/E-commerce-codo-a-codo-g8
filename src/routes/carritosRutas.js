@@ -9,6 +9,21 @@ router.post('/nuevo/:clienteId', async (req, res) => {
   const clienteId = req.params.clienteId;
 
   try {
+    // Llamar a la función createCart que ahora devuelve toda la información del carrito y sus elementos
+    const carritoInfo = await CarritosController.createCart(clienteId);
+
+    res.status(201).json({ message: 'Carrito creado con éxito', carrito: carritoInfo });
+  } catch (error) {
+    console.error('Error al crear el carrito:', error);
+    res.status(500).json({ error: 'Error al crear el carrito' });
+  }
+});
+
+/*
+router.post('/nuevo/:clienteId', async (req, res) => {
+  const clienteId = req.params.clienteId;
+
+  try {
     const carritoId = await CarritosController.createCart(clienteId);
     res.status(201).json({ message: 'Carrito creado con éxito', carritoId });
   } catch (error) {
@@ -16,6 +31,7 @@ router.post('/nuevo/:clienteId', async (req, res) => {
     res.status(500).json({ error: 'Error al crear el carrito' });
   }
 });
+*/
 
 router.put('/completar/:carritoId', async (req, res) => {
   const carritoId = req.params.carritoId;

@@ -13,7 +13,7 @@ const CarritoElemento = sequelize.define('carrito_elementos', {
   },
   id_producto: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   cantidad: {
     type: DataTypes.INTEGER,
