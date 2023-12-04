@@ -34,10 +34,10 @@ app.use(express.static('public'));
 app.use(express.json());
 
 // Rutas que requieren autenticación con token
-app.use('/api/productos', productosRoutes);
+app.use('/productos', productosRoutes);
 app.use('/carritos', carritosRoutes);
-app.use('/api/carrito-elementos', carritoElementosRoutes);
-app.use('/api/ventas', ventasRoutes);
+app.use('/carrito-elementos', carritoElementosRoutes);
+app.use('/ventas', ventasRoutes);
 //app.use('/api/users', authRoutes);
 //app.use('/api/', mainRoutes);
 

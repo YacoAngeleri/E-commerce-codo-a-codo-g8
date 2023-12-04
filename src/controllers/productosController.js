@@ -12,6 +12,7 @@ const ProductosController = {
   },
 
   addProduct: async (newProduct) => {
+    //console.log(JSON.parse(newProduct));
     try {
       const createdProduct = await Producto.create(newProduct);
       return createdProduct.id_producto;

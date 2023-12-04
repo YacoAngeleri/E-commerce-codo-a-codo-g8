@@ -18,6 +18,13 @@ input {
     border-bottom-color: red;
 }
 
+#cuotas {
+    border-style: none;
+    border-bottom-style: solid;
+    border-bottom-color: red;
+    border-width: 2px;
+}
+
 .box {
    margin-right: 3em;
 }

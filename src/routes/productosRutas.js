@@ -1,10 +1,22 @@
-// routes/productosRutas.js
 import express from 'express';
+import multer from 'multer';
+import path from 'path';
 import ProductosController from '../controllers/productosController.js';
 import authMiddleware from '../middleware/authMiddleware.js';
 
-//router.use(authMiddleware);
 const router = express.Router();
+
+// Configuración de Multer para almacenar archivos en una carpeta temporal
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads/'); // Ruta donde se almacenarán los archivos temporalmente
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname); // Usa el nombre original del archivo
+    }
+});
+
+const upload = multer({ storage: storage });
 
 router.get('/get-all', async (req, res) => {
   try {
@@ -16,15 +28,35 @@ router.get('/get-all', async (req, res) => {
   }
 });
 
-router.post('/add', async (req, res) => {
+router.post('/add', upload.single('imagen'), async (req, res) => {
+  // Accede a los datos enviados desde el formulario
+  const { categoria, licencia, nombre, descripcion, sku, precio, stock, descuento, cuotas } = req.body;
+
   try {
-    const productId = await ProductosController.addProduct(req.body);
+    // Aquí puedes usar la ruta del archivo (imagen) como desees
+    const filePath = req.file.path;
+
+    // Llamada a la función del controlador para agregar el producto
+    const productId = await ProductosController.addProduct({
+      categoria,
+      licencia,
+      nombre,
+      descripcion,
+      sku,
+      precio,
+      stock,
+      descuento,
+      cuotas,
+      imagen: filePath  // Usa la ruta del archivo en lugar del nombre
+    });
+
     res.json({ message: 'Product added successfully', productId });
   } catch (error) {
     console.error('Error adding product:', error);
     res.status(500).json({ error: 'Error adding product to the database' });
   }
 });
+
 
 router.post('/edit', async (req, res) => {
   try {

@@ -17,7 +17,7 @@ const Producto = sequelize.define('Producto', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  marca: {
+  licencia: {
     type: DataTypes.STRING,
   },
   categoria: {
@@ -42,22 +42,10 @@ const Producto = sequelize.define('Producto', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  imagen_front: {
+  imagen: {
     type: DataTypes.STRING,
   },
-  imagen_back: {
-    type: DataTypes.STRING,
-  },
-  fecha_creacion: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-    allowNull: false,
-  },
-  fecha_actualizacion: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-    allowNull: false,
-  },
+  
 });
 
 export default Producto;

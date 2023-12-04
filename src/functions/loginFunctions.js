@@ -100,7 +100,6 @@ const findAdmin = async (email, plainPassword) => {
     if (!userAdmin) {
       return null; // Devuelve null si no se encuentra al administrador
     }
-
     const match = await bcrypt.compare(plainPassword, userAdmin.contrasena);
 
     if (!match) {
