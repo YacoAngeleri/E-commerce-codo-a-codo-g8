@@ -30,7 +30,7 @@ createCart: async (clienteId) => {
       ],
     });
 
-    if (existingCart) {
+    if (existingCart.length > 0){
       // Si ya hay un carrito activo, puedes retornar toda su información
       return existingCart;
     }
