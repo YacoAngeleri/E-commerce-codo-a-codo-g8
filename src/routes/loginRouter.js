@@ -42,7 +42,7 @@ loginRouter.post('/login', async (req, res) => {
         const htmlFilePath = path.join(__dirname, '../../public/HTML/agregar-producto.html');
         res.sendFile(htmlFilePath);
       } else {
-        getCarrito(token);
+        
         const htmlFilePath = path.join(__dirname, '../../public/HTML/productos.html');
         res.sendFile(htmlFilePath);
       }
