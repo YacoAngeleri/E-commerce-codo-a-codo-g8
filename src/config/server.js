@@ -34,6 +34,7 @@ app.use(cors());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../views/partials'));
+app.set('views', path.join(__dirname, '../views/pages'));
 
 app.use(express.json());
 

@@ -1,6 +1,6 @@
 import express from 'express';
 //mport cors from 'cors';
-import ProductosController from '../controllers/productosController.js';
+//import ProductosController from '../views/pages/';
 import authMiddleware from '../middleware/authMiddleware.js';
 import bodyParser from 'body-parser';
 import { findUserByEmail, findAdmin, loginUser } from '../functions/loginFunctions.js';
@@ -51,8 +51,9 @@ loginRouter.post('/login', async (req, res) => {
         res.sendFile(htmlFilePath);
       } else {
         
-        res.render('header', { loggedIn });
-
+        //res.render('header', { loggedIn });
+        res.render("productos", { loggedIn });
+        
         // const htmlFilePath = path.join(__dirname, '../../public/HTML/productos.html');
         // res.sendFile(htmlFilePath);
       }

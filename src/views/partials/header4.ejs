@@ -1,0 +1,82 @@
+<header> <!-- Inicio Header -->
+    <nav class="navbar">
+        <picture class="navbar__logo">
+            <a href="../index.html">
+            <img src="../img/branding/logo_light_horizontal.svg" alt="Isologotipo de la marca Funkoshop">
+        </a>
+        </picture>
+    <ul class="navbar__menu">
+            <li class="navbar__item with-submenu">
+                <a class="navbar__link with-icon" href="productos.html">SHOP<iconify-icon icon="carbon:chevron-down"></iconify-icon></a>
+            <ul class="submenu">
+                    <li class="submenu__item">
+                        <a href="" class="submenu__link">Funkos</a>
+                    </li>
+                    <li class="submenu__item">
+                        <a href="" class="submenu__link">Remeras</a>
+                    </li>
+                    <li class="submenu__item">
+                        <a href="" class="submenu__link">Llaveros</a>
+                    </li>
+            </ul>
+            </li>
+            <li>    
+                <a class="navbar__link" href="contacto.html">CONTACTO</a>    
+            </li class="navbar__item">
+              <!--agrego funcion logout-->
+
+            <li> 
+                <% if (loggedIn) { %>
+                    <!--<form action="/login" method="get">-->
+                        <a a href="#" class="navbar__link" id="logoutLink" >LOGOUT</a>
+
+                            <script>
+                                document.getElementById('logoutLink').onclick = function(event) {
+                                   console.log('Hiciste clic en el enlace LOGOUT');
+                                   event.preventDefault();
+
+                                   fetch('/logout', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        // Puedes incluir encabezados adicionales si es necesario, como tokens de autenticación
+                                    },
+                                    // Puedes enviar datos en el cuerpo de la solicitud si es necesario
+                                    // body: JSON.stringify({ key: 'value' }),
+                                })
+                                .then(response => {
+                                    // Maneja la respuesta del servidor
+                                    if (response.ok) {
+                                        // La solicitud fue exitosa, redirige al usuario
+                                        window.location.href = '/login'; // Reemplaza con la URL deseada
+                                    } else {
+                                        // La solicitud falló, maneja el error de alguna manera
+                                        console.error('Error al cerrar sesión:', response.status, response.statusText);
+                                    }
+                                })
+                                .catch(error => {
+                                    // Maneja errores de red o de otro tipo
+                                    console.error('Error al cerrar sesión:', error);
+                                });
+                            };
+                            
+                                
+                                </script>
+
+                    <!--</form>-->
+                <% } else { %>
+                    <a class="navbar__link" href="ingresar.html">LOGIN</a>
+                <% } %>
+                </li  class="navbar__item">
+   
+            <!-- <li>
+                <a class="navbar__link" href="ingresar.html">LOGIN</a>
+            </li  class="navbar__item"> -->
+            <li>
+                <a class="navbar__cart" href="carrito.html">
+                    <img src="../img/icons/cart-icon.svg" alt="ícono de carrito">
+                </a>
+            </li class="navbar__item">
+    </ul>
+    </nav>
+</header> <!-- Fin Header -->
