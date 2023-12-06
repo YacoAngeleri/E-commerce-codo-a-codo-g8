@@ -6,6 +6,6 @@ import app from './src/config/server.js'
 // Iniciar el servidor
 const port = app.get('port');
 app.listen(port, () => {
-    console.log(`Servidor iniciado en el puerto ${port}`);
+    console.log(`http://localhost:${port}`);
 });
 

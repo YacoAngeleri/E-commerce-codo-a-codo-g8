@@ -11,6 +11,8 @@ import carritosRoutes from '../routes/carritosRutas.js';
 import carritoElementosRoutes from '../routes/carritoElementosRutas.js';
 import ventasRoutes from '../routes/ventasRutas.js';
 import mainRoutes from '../routes/mainRutas.js';
+import logoutRouter from '../routes/logoutRouter.js';
+import ejs from 'ejs';
 
 import {fileURLToPath} from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -26,11 +28,13 @@ dotenv.config();
 const port = process.env.SERVER_PORT;
 
 
-
 app.use(cors());
 // Configura express.static para servir archivos estáticos desde la carpeta 'public'
 //app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public'));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '../views/partials'));
+
 app.use(express.json());
 
 // Rutas que requieren autenticación con token
@@ -38,10 +42,12 @@ app.use('/productos', productosRoutes);
 app.use('/carritos', carritosRoutes);
 app.use('/carrito-elementos', carritoElementosRoutes);
 app.use('/ventas', ventasRoutes);
+
 //app.use('/api/users', authRoutes);
 //app.use('/api/', mainRoutes);
 
 app.use('/', loginRouter);
+app.use('/', logoutRouter);
 app.use('/', registerRouter);
 
 app.set('port', port);

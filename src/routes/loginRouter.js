@@ -7,20 +7,28 @@ import { findUserByEmail, findAdmin, loginUser } from '../functions/loginFunctio
 //Fix para __direname
 import path from 'path';
 import {fileURLToPath} from 'url';
+import ejs from 'ejs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+let loggedIn = false;
 
 const loginRouter = express.Router();
+
+
 
 loginRouter.use(bodyParser.urlencoded({ extended: true }));
 loginRouter.use(bodyParser.json());
 
+
+
 loginRouter.get('/login', async (req, res) => {
     // Ruta al archivo HTML que deseas enviar
-    const htmlFilePath = path.join(__dirname, '../../public/HTML/ingresar.html');
+    res.render('header', { loggedIn });
+
+    //const htmlFilePath = path.join(__dirname, '../../public/HTML/ingresar.html');
   
     // Envía el archivo HTML como respuesta
-    res.sendFile(htmlFilePath);
+   // res.sendFile(htmlFilePath);
   });
 
 
@@ -43,14 +51,21 @@ loginRouter.post('/login', async (req, res) => {
         res.sendFile(htmlFilePath);
       } else {
         
-        const htmlFilePath = path.join(__dirname, '../../public/HTML/productos.html');
-        res.sendFile(htmlFilePath);
+        res.render('header', { loggedIn });
+
+        // const htmlFilePath = path.join(__dirname, '../../public/HTML/productos.html');
+        // res.sendFile(htmlFilePath);
       }
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);
       res.status(500).json({ success: false, message: 'Nombre de usuario o Contraseña equivocada' });
     }
+
+    loggedIn = true;
+  
   });
+
+  
   
   export default loginRouter;
 
