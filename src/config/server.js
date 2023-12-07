@@ -44,8 +44,8 @@ app.use('/carritos', carritosRoutes);
 app.use('/carrito-elementos', carritoElementosRoutes);
 app.use('/ventas', ventasRoutes);
 
-//app.use('/api/users', authRoutes);
-//app.use('/api/', mainRoutes);
+//app.use('/users', authRoutes);
+app.use('/', mainRoutes);
 
 app.use('/', loginRouter);
 app.use('/', logoutRouter);

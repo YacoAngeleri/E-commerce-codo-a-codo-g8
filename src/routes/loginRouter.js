@@ -47,8 +47,10 @@ loginRouter.post('/login', async (req, res) => {
   
       // Redirige al usuario según si es administrador o no
       if (isAdminMode) {
-        const htmlFilePath = path.join(__dirname, '../../public/HTML/agregar-producto.html');
-        res.sendFile(htmlFilePath);
+        //const htmlFilePath = path.join(__dirname, '../../public/HTML/agregar-producto.html');
+        //res.sendFile(htmlFilePath);
+        loggedIn = true;
+        res.render("agregar-producto", { loggedIn });
       } else {
         
         //res.render('header', { loggedIn });

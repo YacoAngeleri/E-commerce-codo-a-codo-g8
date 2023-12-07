@@ -1,9 +1,11 @@
 import express from 'express';
 import MainController from '../controllers/mainController.js';
+import ejs from 'ejs';
 
 const router = express.Router();
 router.get('/home', async (req, res) => {
     try {
+        //res.render('index', false );
         const results = await MainController.getHome();
         res.json(results);
     } catch (error) {
