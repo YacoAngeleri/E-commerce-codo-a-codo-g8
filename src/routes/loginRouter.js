@@ -54,7 +54,7 @@ loginRouter.post('/login', async (req, res) => {
       } else {
         
         //res.render('header', { loggedIn });
-        res.render("productos", { loggedIn });
+        res.render("productos.ejs", { loggedIn });
         
         // const htmlFilePath = path.join(__dirname, '../../public/HTML/productos.html');
         // res.sendFile(htmlFilePath);
