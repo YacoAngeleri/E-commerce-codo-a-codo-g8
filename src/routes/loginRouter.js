@@ -10,7 +10,6 @@ import {fileURLToPath} from 'url';
 import ejs from 'ejs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-let loggedIn = false;
 
 const loginRouter = express.Router();
 
@@ -22,13 +21,9 @@ loginRouter.use(bodyParser.json());
 
 
 loginRouter.get('/login', async (req, res) => {
-    // Ruta al archivo HTML que deseas enviar
-    res.render('header', { loggedIn });
+    
+    res.render("productos.ejs", { loggedIn: req.session.loggedIn });
 
-    //const htmlFilePath = path.join(__dirname, '../../public/HTML/ingresar.html');
-  
-    // Envía el archivo HTML como respuesta
-   // res.sendFile(htmlFilePath);
   });
 
 
@@ -45,26 +40,30 @@ loginRouter.post('/login', async (req, res) => {
       // Llama a la función loginUser con el nuevo parámetro isAdminMode
       const token = await loginUser(email, contraseña, isAdminMode);
   
+      //loggedIn = true;
+      req.session.loggedIn = true;
+      // Puedes agregar más información a la sesión si es necesario
+      req.session.user = { email: email };
+
       // Redirige al usuario según si es administrador o no
       if (isAdminMode) {
-        //const htmlFilePath = path.join(__dirname, '../../public/HTML/agregar-producto.html');
-        //res.sendFile(htmlFilePath);
-        loggedIn = true;
-        res.render("agregar-producto", { loggedIn });
+        
+       
+        res.render("agregar-producto", { loggedIn: req.session.loggedIn, email: req.session.user.email });
       } else {
         
-        //res.render('header', { loggedIn });
-        res.render("productos.ejs", { loggedIn });
         
-        // const htmlFilePath = path.join(__dirname, '../../public/HTML/productos.html');
-        // res.sendFile(htmlFilePath);
+        //res.render("productos.ejs", { loggedIn });
+        res.render("productos", { loggedIn: req.session.loggedIn, email: req.session.user.email });
+        
+        
       }
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);
       res.status(500).json({ success: false, message: 'Nombre de usuario o Contraseña equivocada' });
     }
 
-    loggedIn = true;
+    //loggedIn = true;
   
   });
 

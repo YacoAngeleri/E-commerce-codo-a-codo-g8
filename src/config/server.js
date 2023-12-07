@@ -13,6 +13,7 @@ import ventasRoutes from '../routes/ventasRutas.js';
 import mainRoutes from '../routes/mainRutas.js';
 import logoutRouter from '../routes/logoutRouter.js';
 import ejs from 'ejs';
+import session from 'express-session';
 
 import {fileURLToPath} from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -26,6 +27,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 dotenv.config();
 const port = process.env.SERVER_PORT;
+
+app.use(session({
+    secret: 'palabara secreta', //process.env.JWT_SECRETA,
+    resave: false,
+    saveUninitialized: true,
+  }));
+  
+
 
 
 app.use(cors());
@@ -49,6 +58,8 @@ app.use('/', mainRoutes);
 
 app.use('/', loginRouter);
 app.use('/', logoutRouter);
+// Usa el enrutador de logout
+app.use('/logout', logoutRouter);
 app.use('/', registerRouter);
 
 app.set('port', port);
@@ -57,5 +68,16 @@ app.set('port', port);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Middleware para hacer que la sesión esté disponible en las vistas
+app.use((req, res, next) => {
+    res.locals.loggedIn = req.session.loggedIn || false;
+    next();
+  });
+  
+app.use((req, res, next) => {
+    res.locals.req = req;
+    res.locals.res = res;  // Añade esta línea para asegurarte de que res está disponible en res.locals
+    next();
+});
 
 export default app; // Exporta la instancia de Express o el servidor configurado
