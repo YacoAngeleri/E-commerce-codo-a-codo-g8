@@ -6,16 +6,21 @@ import {fileURLToPath} from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 
-const carritoRouter = express.Router();
+const shopRouter = express.Router();
 
-carritoRouter.get('/shop', async (req, res) => {
-    // Ruta al archivo HTML que deseas enviar
-    const htmlFilePath = path.join(__dirname, '../../public/HTML/productos.html');
+shopRouter.get('/', (req, res) => {
   
-    // Envía el archivo HTML como respuesta
-    res.sendFile(htmlFilePath);
-  });
+  if (req.session && req.session.user) {
+    console.log('muestro productos')
+    console.log('res.locals.loggedIn', res.locals.loggedIn)
+    res.render("productos.ejs", { loggedIn: res.locals.loggedIn, email: res.locals.user.email });
+  } else {
+    console.log('me redirecciona a /login')
+    // Manejar el caso en que no haya sesión o user en la sesión
+    res.redirect('/productos'); // o cualquier otra acción que desees
+  }
   
+});
 
 //loginrouter.post('/', async(req,res)=>{
 //const result = await users.postUsers(req.body);

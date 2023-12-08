@@ -119,6 +119,8 @@ const loginUser = async (email, plainPassword, isAdminMode) => {
   try {
     // Encuentra el usuario por su correo electrónico
     const user = await findUserByEmail(email);
+    console.log('USER: ', user);
+
 
     if (isAdminMode) {
       // Si está en modo administrador, verifica las credenciales del administrador
@@ -129,7 +131,7 @@ const loginUser = async (email, plainPassword, isAdminMode) => {
 
       // Genera un token JWT para el administrador
       const secret = process.env.JWT_SECRET;
-      const tokenAdmin = jwt.sign({ userId: user.id, email: user.correo, isAdmin: true }, secret, { expiresIn: '1h' });
+      const tokenAdmin = jwt.sign({ userId: user.id_usuario, email: user.correo, isAdmin: true }, secret, { expiresIn: '1h' });
 
       return tokenAdmin;
     }
@@ -147,7 +149,8 @@ const loginUser = async (email, plainPassword, isAdminMode) => {
 
     // Genera un token JWT para el usuario
     const secret = process.env.JWT_SECRET;
-    const tokenUser = jwt.sign({ userId: user.id, email: user.correo, isAdmin: false }, secret, { expiresIn: '1h' });
+    const tokenUser = jwt.sign({ userId: user.id_usuario, email: user.correo, isAdmin: false }, secret, { expiresIn: '1h' });
+    
 
     return tokenUser;
   } catch (error) {

@@ -3,6 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import ProductosController from '../controllers/productosController.js';
 import authMiddleware from '../middleware/authMiddleware.js';
+import ejs from 'ejs';
 
 const router = express.Router();
 
@@ -17,6 +18,20 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+
+router.get('/', async(req, res) => {
+  console.log("RUTA PRODUCTOS");
+  // Verifica si req.session.user está definido antes de intentar acceder a su propiedad email
+  if (req.session.user) {
+    req.session.user.email = "";
+  } else {
+    // Si req.session.user no está definido, puedes inicializarlo con un objeto vacío
+    req.session.user = {};
+    req.session.user.email = "";
+  }
+    res.render("productos.ejs", { loggedIn: req.session.loggedIn, email: req.session.user.email });
+});
 
 router.get('/get-all', async (req, res) => {
   try {

@@ -15,12 +15,18 @@ registerRouter.use(bodyParser.urlencoded({ extended: true }));
 registerRouter.use(bodyParser.json());
 
 registerRouter.get('/register', async (req, res) => {
-    // Ruta al archivo HTML que deseas enviar
-    const htmlFilePath = path.join(__dirname, '../../public/HTML/registrarse.html');
-  
-    // Envía el archivo HTML como respuesta
-    res.sendFile(htmlFilePath);
+       // Verifica si req.session.user está definido antes de intentar acceder a su propiedad email
+  if (req.session.user) {
+    req.session.user.email = "";
+  } else {
+    // Si req.session.user no está definido, puedes inicializarlo con un objeto vacío
+    req.session.user = {};
+    req.session.user.email = "";
+  }
+    res.render("registrarse", { loggedIn: req.session.loggedIn, email: req.session.user.email });
+
   });
+  
 
   // Ruta para manejar el registro
 
@@ -39,6 +45,8 @@ registerRouter.get('/register', async (req, res) => {
         // Insertar los datos en la base de datos
         const newUser = await insertUserIntoDatabase(nombre, apellido, email, contraseña);
         console.log('Resultado de la inserción en la base de datos:', newUser);
+
+        req.session.user = { email: email };
 
         // Redirigir al usuario al carrito después del registro exitoso
         res.redirect('/login');

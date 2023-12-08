@@ -1,8 +1,28 @@
 import express from 'express';
-import MainController from '../controllers/mainController.js';
+
+//Fix para __direname
+import path from 'path';
+import {fileURLToPath} from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import ejs from 'ejs';
 
+import MainController from '../controllers/mainController.js';
+
 const router = express.Router();
+
+router.get('/', (req, res) => {
+  // Verifica si req.session.user está definido antes de intentar acceder a su propiedad email
+  if (req.session.user) {
+    req.session.user.email = "";
+  } else {
+    // Si req.session.user no está definido, puedes inicializarlo con un objeto vacío
+    req.session.user = {};
+    req.session.user.email = "";
+  }
+    res.render('index', { loggedIn: req.session.loggedIn, email: req.session.user.email });
+    
+  });
+
 router.get('/home', async (req, res) => {
     try {
         //res.render('index', false );

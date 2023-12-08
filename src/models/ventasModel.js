@@ -14,7 +14,7 @@ const Ventas = sequelize.define('Ventas', {
     type: DataTypes.DATE,
     allowNull: false,
   },
-  id_cliente: {
+  id_usuario: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
@@ -36,10 +36,6 @@ const Ventas = sequelize.define('Ventas', {
   },
   metodo_pago: {
     type: DataTypes.ENUM('efectivo', 'tarjeta_credito', 'transferencia', 'otros'),
-    allowNull: false,
-  },
-  id_usuario: {
-    type: DataTypes.INTEGER,
     allowNull: false,
   },
   descuento: {

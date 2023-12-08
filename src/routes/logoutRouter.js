@@ -14,6 +14,7 @@ logoutRouter.use(bodyParser.urlencoded({ extended: true }));
 logoutRouter.use(bodyParser.json());
 
 logoutRouter.get('/logout', (req, res) => {
+    console.log('GET LOGOUT')
     req.session.destroy();
     // Puedes descomentar la siguiente línea si necesitas utilizar loggedIn
     // loggedIn = false;
@@ -22,12 +23,13 @@ logoutRouter.get('/logout', (req, res) => {
 });
 
 logoutRouter.post('/logout', (req, res) => {
+    console.log('POST LOGOUT')
     req.session.destroy((err) => {
         if (err) {
             console.error('Error al cerrar sesión:', err);
             res.status(500).json({ success: false, message: 'Error al cerrar sesión' });
         } else {
-            res.redirect('/login'); // Reemplaza con la URL deseada
+            res.redirect('/shop'); // Reemplaza con la URL deseada
         }
     });
 });
