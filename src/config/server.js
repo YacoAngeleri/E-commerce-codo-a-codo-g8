@@ -9,6 +9,7 @@ import session from 'express-session';
 import {fileURLToPath} from 'url';
 import registerRouter from '../routes/registerRouter.js';
 import loginRouter from '../routes/loginRouter.js';
+import flash from 'express-flash';
 
 import productosRoutes from '../routes/productosRutas.js';
 import carritosRoutes from '../routes/carritosRutas.js';
@@ -46,7 +47,9 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
   }));
-  
+
+  app.use(flash());
+
 // Configuración body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

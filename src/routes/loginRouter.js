@@ -1,4 +1,5 @@
 import express from 'express';
+import flash from 'express-flash';
 //mport cors from 'cors';
 //import ProductosController from '../views/pages/';
 import authMiddleware from '../middleware/authMiddleware.js';
@@ -48,7 +49,9 @@ loginRouter.get('/login', async (req, res) => {
   }
     req.session.loggedIn = false;
     
-    res.render("ingresar.ejs", { loggedIn: req.session.loggedIn, email: req.session.user.email });
+    const messages = req.flash();
+
+    res.render("ingresar.ejs", {  messages, loggedIn: req.session.loggedIn, email: req.session.user.email });
 
   });
 
@@ -61,30 +64,29 @@ loginRouter.get('/login', async (req, res) => {
   
       // Verifica si se trata de un inicio de sesión de administrador
       const isAdminMode = email === 'admin@admin.com';
-      
+     
       // Llama a la función loginUser con el nuevo parámetro isAdminMode
       const token = await loginUser(email, contraseña, isAdminMode);
   
       req.session.loggedIn = true;
-      req.session.user = { email: email };
-
-
+      req.session.user = { email };
+  
       // Redirige al usuario según si es administrador o no
       if (isAdminMode) {
         res.render("agregar-producto", { loggedIn: req.session.loggedIn, email: req.session.user.email });
       } else {
         console.log('TOKEN: ', token);
         const decodedToken = decodeTokenUser(token);
-
+  
         // Acceder a userId y otras propiedades si es necesario
         const userId = decodedToken.userId;
         const userEmail = decodedToken.email;
-
+  
         console.log('ID del usuario:', userId);
         console.log('Correo electrónico del usuario:', userEmail);
-
+  
         const carrito = CarritosController.createCart(userId);
-
+  
         res.render("productos", {
           loggedIn: req.session.loggedIn,
           email: req.session.user.email,
@@ -93,10 +95,11 @@ loginRouter.get('/login', async (req, res) => {
       }
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);
-      res.status(500).json({ success: false, message: 'Nombre de usuario o Contraseña equivocada' });
+      req.flash('error', 'Nombre de usuario o Contraseña equivocada');
+      res.redirect('/login'); // Redirige a la página de inicio de sesión
     }
-});
-
+  });
+  
 
   
   
