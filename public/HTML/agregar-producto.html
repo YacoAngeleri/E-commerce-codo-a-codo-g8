@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home  |  Funkoshop</title>
-    <link rel="stylesheet" href="../CSS/index.css">
     <link rel="stylesheet" href="../CSS/reset.css">
+    <link rel="stylesheet" href="../CSS/index.css">
+    
     <link rel="stylesheet" href="../CSS/agregar-producto.css">
     <link rel="stylesheet" href="../CSS/footer.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+   
 </head>
 <body>    
     <header> <!-- Inicio Header -->
@@ -52,82 +51,70 @@
     </header> <!-- Fin Header -->
 
     <main>
-        <h1 class="text-left p-4">CREAR NUEVO ITEM</h1>
-            <form id="agregar-producto-form" action="/productos/add" class="container" method="post" enctype="multipart/form-data">
-           
-                <div class="row justify-content-left">
-                    
-                    <label for="categoria" class="col-md-1">Categoría:</label>
-                    <select required class="col-md-3 box" id="categoria" name="categoria">
-                        <option value="" disabled selected>Seleccionar</option>
-
-                        <option>Funko</option>
-                        
-                        <option>Remera</option>
-                        
-                        <option>Llavero</option>
-                    </select>
-                    
-                    
-
-                    <label class="col-md-1" for="licencia">Licencia:</label>
-                    <select required class="col-md-3" id="licencia" name="licencia">
-                        <option value="" disabled selected>Seleccionar</option>
-
-                        <option>Harry Potter</option>
-                        
-                        <option>Star Wars</option>
-                        
-                        <option>Pokemon</option>
-                        
-                    </select>
-                </div>
-
-                <div class="row justify-content-left">
-                    <label for="nombre" class="col-md-2">Nombre del producto:</label>
-                    <input type="text" name="nombre" id="nombre" class="col-md-3">
-                </div>
-
-                <div>
-                    <textarea name="descripcion" id="descripcion" class="p-2 texto" cols="121" rows="8" placeholder="Descripción del producto"></textarea>
-                </div>
- 
-                <div class=" row justify-content-left">
-                    <label for="sku" class="col-md-1">SKU:</label>
-                    <input type="text" name="sku" id="sku" class="col-md-2 box" placeholder="SSK1153A985">
-
-                    <label class="col-md-1" for="precio">Precio:</label>
-                    <input required class="col-md-3" type="number" id="precio" name="precio" value="0.00" placeholder="$0.00" step="0.01">
-
-                    <label for="stock" class="col-md-1">Stock:</label>
-                    <input type="number" name="stock" id="stock" class="col-md-2 box" placeholder="0">
-                </div>
-              
-                <div class="row justify-content-left">
-                    
-                    <label for="descuento" class="col-md-1">Descuento:</label>
-                    <input type="number" name="descuento" id="descuento" class="col-md-2 box" placeholder="0.00%" step="0.01">
-
-                    
-                    <label class="col-md-1" for="cuotas">Cuotas:</label>
-                    <select required class="col-md-3" id="cuotas" name="cuotas">
-                        <option value="0" selected>Ninguna</option>
-                        <option value="3">3 sin interés</option>
-                        <option value="6">6 sin interés</option>
-                        <option value="12">12 sin interés</option>
-                    </select>
-                </div>
-
-                <label for="imagen">Imágen:</label>   
-                <input type="file" name="imagen" id="imagen" class="imag" >        
-                
-
-
-                <div class="flex-row justify-content-center align-items-baseline">
-                    <input type="submit" value="Agregar producto" class="btn btn-danger col-md-3">
-                    <input type="reset" value="Borrar" class="btn btn-danger col-md-3">
-
-            </form>
+        <h1>CREAR NUEVO ITEM</h1>
+        <form class="formulario">
+            <div class="fila">
+              <div class="campo-doble">
+                <label for="categoria">Categoría:</label>
+                <select id="categoria" name="categoria" class="completar_campo">
+                  <option value="opcion1">Opción 1</option>
+                  <option value="opcion2">Opción 2</option>
+                  <!-- Agrega más opciones según sea necesario -->
+                </select>
+              </div>
+              <div class="campo-doble">
+                <label for="licencia">Licencia:</label>
+                <select id="licencia" name="licencia" class="completar_campo">
+                  <option value="opcion1">Opción 1</option>
+                  <option value="opcion2">Opción 2</option>
+                  <!-- Agrega más opciones según sea necesario -->
+                </select>
+              </div>
+            </div>
+            <div class="fila">
+              <div class="campo">
+                <label for="nombreProducto">Nombre del Producto:</label>
+                <input type="text" id="nombreProducto" name="nombreProducto" class="margen-inferior-rojo">
+              </div>
+            </div>
+            <div class="fila">
+              <div class="campo">
+                <label for="descripcion">Descripción del Producto:</label>
+                <textarea id="descripcion" name="descripcion" class="completar_campo"></textarea>
+              </div>
+            </div>
+            <div class="fila2">
+              <div class="campo-seis">
+                <label for="sku">SKU:</label>
+                <input type="text" id="sku" name="sku" class="margen-inferior-rojo">
+              </div>
+              <div class="campo-seis">
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" name="precio" class="margen-inferior-rojo">
+              </div>
+              <div class="campo-seis">
+                <label for="stock">Stock:</label>
+                <input type="number" id="stock" name="stock" class="margen-inferior-rojo">
+              </div>
+            </div>
+            <div class="fila">
+              <div class="campo">
+                <label for="descuento">Descuento:</label>
+                <input type="number" id="descuento" name="descuento" class="completar_campo">
+              </div>
+              <div class="campo">
+                <label for="cuotas">Cuotas:</label>
+                <select id="cuotas" name="cuotas" class="margen-inferior-rojo">
+                  <option value="opcion1">Opción 1</option>
+                  <option value="opcion2">Opción 2</option>
+                  <!-- Agrega más opciones según sea necesario -->
+                </select>
+              </div>
+            </div>
+            <div class="fila">
+              <button type="submit">Enviar</button>
+            </div>
+          </form>
     </main>
    
     <footer>
