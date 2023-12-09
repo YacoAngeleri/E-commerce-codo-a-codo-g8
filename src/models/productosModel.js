@@ -42,10 +42,12 @@ const Producto = sequelize.define('Producto', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  imagen: {
+  imagen_front: {
     type: DataTypes.STRING,
   },
-  
+  imagen_back: {
+    type: DataTypes.STRING,
+  },
 });
 
 export default Producto;

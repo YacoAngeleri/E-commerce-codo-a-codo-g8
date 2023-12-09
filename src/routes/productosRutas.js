@@ -19,10 +19,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-
+// En tu ruta de productos
 router.get('/', async(req, res) => {
-  console.log("RUTA PRODUCTOS");
-  // Verifica si req.session.user está definido antes de intentar acceder a su propiedad email
+  try {
+    // Obtener productos desde la base de datos o donde los tengas almacenados
+    const productos = await ProductosController.getAllProducts();
+
+        // Verifica si req.session.user está definido antes de intentar acceder a su propiedad email
   if (req.session.user) {
     req.session.user.email = "";
   } else {
@@ -30,7 +33,27 @@ router.get('/', async(req, res) => {
     req.session.user = {};
     req.session.user.email = "";
   }
-    res.render("productos.ejs", { loggedIn: req.session.loggedIn, email: req.session.user.email });
+  console.log(productos)
+
+  const page = req.query.page || 1;
+  const productosPorPagina = 9; // Número de productos que deseas mostrar por página
+
+  // Calcular el índice de inicio y final para la página actual
+  const inicio = (page - 1) * productosPorPagina;
+  const fin = inicio + productosPorPagina;
+
+  // Obtener los productos para la página actual
+  const productosDeLaPagina = productos.slice(inicio, fin);
+
+  // Calcular el número total de páginas
+  const totalPaginas = Math.ceil(productos.length / productosPorPagina);
+
+    // Renderizar la vista de productos y pasar la variable productos
+    res.render("productos.ejs", { productos: productosDeLaPagina, currentPage: parseInt(page), totalPaginas, loggedIn: req.session.loggedIn, email: req.session.user.email });
+  } catch (error) {
+    console.error('Error al obtener productos:', error);
+    res.status(500).json({ error: 'Error al obtener productos desde la base de datos' });
+  }
 });
 
 router.get('/get-all', async (req, res) => {
@@ -43,13 +66,14 @@ router.get('/get-all', async (req, res) => {
   }
 });
 
-router.post('/add', upload.single('imagen'), async (req, res) => {
+router.post('/add', upload.fields([{ name: 'imagen_front', maxCount: 1 }, { name: 'imagen_back', maxCount: 1 }]), async (req, res) => {
   // Accede a los datos enviados desde el formulario
   const { categoria, licencia, nombre, descripcion, sku, precio, stock, descuento, cuotas } = req.body;
 
   try {
-    // Aquí puedes usar la ruta del archivo (imagen) como desees
-    const filePath = req.file.path;
+    // Accede a las rutas de los archivos (imágenes) como desees
+    const filePathFront = req.files['imagen_front'][0].path;
+    const filePathBack = req.files['imagen_back'][0].path;
 
     // Llamada a la función del controlador para agregar el producto
     const productId = await ProductosController.addProduct({
@@ -62,7 +86,8 @@ router.post('/add', upload.single('imagen'), async (req, res) => {
       stock,
       descuento,
       cuotas,
-      imagen: filePath  // Usa la ruta del archivo en lugar del nombre
+      imagen_front: filePathFront,
+      imagen_back: filePathBack,
     });
 
     res.json({ message: 'Product added successfully', productId });
@@ -71,7 +96,6 @@ router.post('/add', upload.single('imagen'), async (req, res) => {
     res.status(500).json({ error: 'Error adding product to the database' });
   }
 });
-
 
 router.post('/edit', async (req, res) => {
   try {
