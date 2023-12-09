@@ -464,3 +464,21 @@ body {
         opacity: 1;
     }
 }
+
+/* Tablet Styles */
+@media only screen and (max-width: 991px) {
+    .collection__content {
+        width: 100%; /* Adjust as needed */
+    }
+
+    .slider__items {
+        width: 100%; /* Adjust as needed */
+    }
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 768px) {
+    .collection__content, .slider__items {
+        width: 100%; /* Adjust as needed */
+    }
+}
